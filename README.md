@@ -1,59 +1,123 @@
-# NotificationApp
+# Notification App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.6.
+Interface web para publicação e monitoramento de mensagens em filas e exchanges do RabbitMQ. Desenvolvida em Angular 20 com design minimalista e responsivo.
 
-## Development server
+---
 
-To start a local development server, run:
+## Funcionalidades
 
-```bash
-ng serve
-```
+- **Publicar mensagens** via Exchange (com routing key) ou Queue diretamente
+- **Suporte a wildcards** na routing key (`*` para uma palavra, `#` para zero ou mais)
+- **Seleção de Content Type**: `application/json`, `text/plain`, `application/xml`
+- **Listagem de mensagens recentes** recebidas pelo backend
+- **Monitoramento de saúde** do serviço em tempo real (status no header)
+- **Cópia rápida** do ID da mensagem publicada e do conteúdo de mensagens recebidas
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## Tecnologias
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+| Tecnologia | Versão |
+|---|---|
+| Angular | 20.x |
+| TypeScript | 5.9.x |
+| Bootstrap | 5.3.2 |
+| Font Awesome | 6.5.1 |
+| RxJS | 7.8.x |
 
-```bash
-ng generate component component-name
-```
+---
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Pré-requisitos
 
-```bash
-ng generate --help
-```
+- [Node.js](https://nodejs.org/) 18+
+- [Angular CLI](https://angular.io/cli) 20+
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Instalação e execução
 
 ```bash
-ng test
+# Clonar o repositório
+git clone https://github.com/CesarAVB/notification-app.git
+cd notification-app
+
+# Instalar dependências
+npm install
+
+# Iniciar servidor de desenvolvimento
+npm start
 ```
 
-## Running end-to-end tests
+A aplicação estará disponível em `http://localhost:4200`.
 
-For end-to-end (e2e) testing, run:
+---
+
+## Build para produção
 
 ```bash
-ng e2e
+npm run build
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Os arquivos gerados estarão na pasta `dist/notification-app`.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Configuração da API
+
+A URL do backend é definida nos arquivos de ambiente:
+
+| Arquivo | Uso |
+|---|---|
+| `src/environments/environment.ts` | Desenvolvimento |
+| `src/environments/environment.prod.ts` | Produção |
+
+```typescript
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080'
+};
+```
+
+### Endpoints esperados pelo frontend
+
+| Método | Endpoint | Descrição |
+|---|---|---|
+| `POST` | `/notifications/publish` | Publica uma mensagem |
+| `GET` | `/notifications/recent` | Retorna mensagens recentes |
+| `GET` | `/notifications/health` | Verifica saúde do serviço |
+
+---
+
+## Estrutura do projeto
+
+```
+src/
+├── app/
+│   ├── components/
+│   │   ├── header/          # Header com status do serviço
+│   │   ├── footer/          # Footer com links
+│   │   ├── publish-form/    # Formulário de publicação
+│   │   └── message-list/    # Lista de mensagens recentes
+│   ├── models/
+│   │   └── notification.model.ts   # Interfaces TypeScript
+│   ├── services/
+│   │   └── notification.ts         # Serviço HTTP
+│   └── environments/
+│       ├── environment.ts
+│       └── environment.prod.ts
+├── styles.css               # Design system global (CSS custom properties)
+└── index.html
+```
+
+---
+
+## Autor
+
+**César Augusto Vieira Bezerra**
+
+- GitHub: [github.com/CesarAVB](https://github.com/CesarAVB/)
+- Portfólio: [portfolio.cesaraugusto.dev.br](https://portfolio.cesaraugusto.dev.br/)
+
+---
+
+© 2026 César Augusto Vieira Bezerra - Todos os direitos reservados.
