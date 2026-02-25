@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.seudominio.com/api/v1'
+  apiUrl: 'https://api-notification.cesaravb.com.br/api/v1'
 };
