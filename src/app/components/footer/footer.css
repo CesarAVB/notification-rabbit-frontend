@@ -1,6 +1,6 @@
 .app-footer {
   padding: 0.875rem 0;
-  background: #1e293b;
+  background: #334155;
   border-top: none;
   font-size: 0.78rem;
   color: #94a3b8;
@@ -16,7 +16,7 @@
 }
 
 .footer-copy {
-  color: #64748b;
+  color: #cbd5e1;
   font-size: 0.76rem;
 }
 
@@ -30,13 +30,13 @@
   display: flex;
   align-items: center;
   gap: 0.35rem;
-  color: #94a3b8;
+  color: #cbd5e1;
   font-weight: 500;
   font-size: 0.78rem;
   text-decoration: none;
   transition: color 0.15s;
 }
-.footer-link:hover { color: #e2e8f0; }
+.footer-link:hover { color: #ffffff; }
 .footer-link i { font-size: 0.82rem; }
 
 @media (max-width: 576px) {
