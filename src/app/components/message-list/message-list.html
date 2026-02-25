@@ -1,1 +1,49 @@
-<p>message-list works!</p>
+<div class="ml-card">
+  <div class="ml-header">
+    <div class="d-flex align-items-center">
+      <i class="fas fa-inbox"></i>
+      <span>Mensagens Recentes</span>
+    </div>
+    <button class="ml-refresh" (click)="loadMessages()" title="Atualizar">
+      <i class="fas fa-sync-alt"></i>
+    </button>
+  </div>
+
+  <div class="ml-body">
+    <div *ngIf="isLoading" class="ml-loading">
+      <div class="spinner-border spinner-border-sm text-primary" role="status">
+        <span class="visually-hidden">Carregando...</span>
+      </div>
+      <span>Carregando mensagens...</span>
+    </div>
+
+    <div *ngIf="!isLoading && messages.length > 0" class="ml-list">
+      <div *ngFor="let msg of messages" class="ml-item fade-up">
+        <div class="ml-item-top">
+          <div class="ml-item-source" [ngClass]="getMessageIconClass(msg)">
+            <i [class]="getMessageIcon(msg)"></i>
+            <span>{{ getMessageTitle(msg) }}</span>
+          </div>
+          <span class="ml-item-time">{{ msg.timestamp | date:'dd/MM HH:mm' }}</span>
+        </div>
+        <p class="ml-item-body">{{ msg.content }}</p>
+        <div class="ml-item-footer">
+          <span class="ml-badge">{{ msg.contentType }}</span>
+          <button class="ml-copy" (click)="copyMessageContent(msg.content)" title="Copiar conteúdo">
+            <i class="fas fa-copy"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isLoading && messages.length === 0" class="ml-empty">
+      <i class="fas fa-inbox"></i>
+      <p>Nenhuma mensagem recebida</p>
+      <small>As mensagens aparecerão aqui quando houver atividade</small>
+    </div>
+
+    <div *ngIf="error" class="ml-error">
+      <i class="fas fa-exclamation-triangle me-2"></i>{{ error }}
+    </div>
+  </div>
+</div>

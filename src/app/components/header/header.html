@@ -1,13 +1,18 @@
-<header class="navbar navbar-dark bg-dark shadow-sm">
-  <div class="container-fluid">
-    <span class="navbar-brand mb-0 h1">
-      <i class="fas fa-bell"></i> Notification Service
-    </span>
-    <div class="d-flex align-items-center gap-3">
-      <span class="text-light">
-        Serviço: <span [class]="getStatusClass()">{{ serviceStatus }}</span>
-      </span>
-      <small class="text-muted">{{ statusMessage }}</small>
+<header class="app-header">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+    <div class="brand d-flex align-items-center">
+      <div class="brand-icon">
+        <i class="fas fa-bell"></i>
+      </div>
+      <div class="ms-3">
+        <span class="brand-name">Notification Service</span>
+        <span class="brand-sub d-none d-sm-block">Sistema de mensageria</span>
+      </div>
+    </div>
+
+    <div class="header-status">
+      <span class="status-dot" [class.online]="serviceStatus === 'UP'" [class.offline]="serviceStatus !== 'UP'"></span>
+      <span class="status-label d-none d-sm-inline">{{ serviceStatus === 'UP' ? 'Online' : 'Offline' }}</span>
     </div>
   </div>
 </header>

@@ -26,3 +26,16 @@ export interface ErrorResponse {
   statusCode: number;
   timestamp: string;
 }
+
+export interface MessageItem {
+  id: string;
+  content: string;
+  contentType?: string;
+  exchange?: string;
+  routingKey?: string;
+  queue?: string;
+  status?: string;
+  timestamp: string;
+}
+
+export type RecentMessagesResponse = MessageItem[];

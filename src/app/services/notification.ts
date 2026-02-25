@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
-import { PublishMessageRequest, PublishMessageResponse, HealthCheckResponse } from '../models/notification.model';
+import { PublishMessageRequest, PublishMessageResponse, HealthCheckResponse, MessageItem } from '../models/notification.model';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +20,17 @@ export class NotificationService {
     return this.http.post<PublishMessageResponse>(
       `${this.apiUrl}/notifications/publish`,
       request
+    ).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  // ====================================================
+  // Métodos - Recupera mensagens recentes
+  // ====================================================
+  getRecentMessages(): Observable<MessageItem[]> {
+    return this.http.get<MessageItem[]>(
+      `${this.apiUrl}/notifications/recent`
     ).pipe(
       catchError(this.handleError)
     );

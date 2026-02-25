@@ -4,7 +4,45 @@
   min-height: 100vh;
 }
 
-main {
+.tips-bar {
+  background: #fffbeb;
+  border-bottom: 1px solid #fde68a;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  color: #78350f;
+}
+
+.tips-bar code {
+  background: rgba(0,0,0,0.07);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-family: inherit;
+  font-size: 0.78rem;
+  color: #92400e;
+}
+
+.main-content {
   flex: 1;
-  padding: 2rem 0;
+  background: var(--bg);
+}
+
+.main-content .container-fluid {
+  padding: 2rem 1.25rem;
+}
+
+@media (max-width: 576px) {
+  .main-content .container-fluid { padding: 1rem 0.75rem; }
+}
+
+/* Responsividade adicional */
+@media (max-width: 576px) {
+  .main-content .container-fluid {
+    padding: 1rem 0.5rem;
+  }
+  .tips-banner {
+    padding: 0.5rem 0;
+  }
+  .tips-banner small {
+    font-size: 0.8rem;
+  }
 }

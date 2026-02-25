@@ -1,14 +1,62 @@
-header {
-  border-bottom: 3px solid #007bff;
+.app-header {
+  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  padding: 0.875rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--shadow-xs);
 }
 
-.navbar-brand {
-  font-weight: 600;
-  font-size: 1.3rem;
-  gap: 8px;
+.brand-icon {
+  width: 38px;
+  height: 38px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
-.badge {
-  font-size: 0.85rem;
-  padding: 0.35rem 0.65rem;
+.brand-name {
+  font-size: 0.975rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.01em;
+  display: block;
+}
+
+.brand-sub {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin-top: 1px;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  background: #d1d5db;
+}
+
+.status-dot.online  { background: var(--success); box-shadow: 0 0 0 3px rgba(5,150,105,0.15); }
+.status-dot.offline { background: var(--danger);  box-shadow: 0 0 0 3px rgba(220,38,38,0.15); }
+
+.status-label {
+  font-weight: 500;
+}
+
+@media (max-width: 576px) {
+  .app-header { padding: 0.7rem 0; }
 }

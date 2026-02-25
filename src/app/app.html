@@ -1,7 +1,23 @@
 <app-header></app-header>
 
-<main class="grow">
-  <app-publish-form></app-publish-form>
+<div class="tips-bar">
+  <div class="container-fluid">
+    <i class="fas fa-lightbulb me-2"></i>
+    <span><strong>Dica:</strong> Use <em>Exchange</em> para publicações em padrão (topic/fanout) ou <em>Queue</em> para envio direto. Routing Key suporta wildcards <code>*</code> e <code>#</code>.</span>
+  </div>
+</div>
+
+<main class="main-content">
+  <div class="container-fluid">
+    <div class="row g-4">
+      <div class="col-12 col-lg-6">
+        <app-publish-form></app-publish-form>
+      </div>
+      <div class="col-12 col-lg-6">
+        <app-message-list></app-message-list>
+      </div>
+    </div>
+  </div>
 </main>
 
 <app-footer></app-footer>

@@ -1,185 +1,89 @@
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-lg-8 mx-auto">
-      <div class="card shadow-sm fade-in">
-        <div class="card-header bg-primary text-white">
-          <h5 class="mb-0">
-            <i class="fas fa-paper-plane"></i> Publicar Mensagem
-          </h5>
-        </div>
+<div class="pf-card">
+  <div class="pf-header">
+    <i class="fas fa-paper-plane"></i>
+    <span>Publicar Mensagem</span>
+  </div>
 
-        <div class="card-body">
-          <!-- Success Alert -->
-          <div *ngIf="showSuccess" class="alert alert-success alert-dismissible fade show" role="alert">
-            <i class="fas fa-check-circle"></i> {{ successMessage }}
-            <button type="button" class="btn-close" (click)="showSuccess = false"></button>
-          </div>
+  <div class="pf-body">
+    <!-- Alertas -->
+    <div *ngIf="showSuccess" class="pf-alert pf-alert-success fade-up">
+      <i class="fas fa-check-circle me-2"></i>{{ successMessage }}
+      <button class="pf-alert-close" (click)="showSuccess = false">&#x2715;</button>
+    </div>
+    <div *ngIf="showError" class="pf-alert pf-alert-danger fade-up">
+      <i class="fas fa-exclamation-circle me-2"></i>{{ errorMessage }}
+      <button class="pf-alert-close" (click)="showError = false">&#x2715;</button>
+    </div>
 
-          <!-- Error Alert -->
-          <div *ngIf="showError" class="alert alert-danger alert-dismissible fade show" role="alert">
-            <i class="fas fa-exclamation-circle"></i> {{ errorMessage }}
-            <button type="button" class="btn-close" (click)="showError = false"></button>
-          </div>
-
-          <!-- Mode Selection -->
-          <div class="mb-4">
-            <label class="form-label fw-bold">
-              <i class="fas fa-sliders-h"></i> Tipo de Publicação
-            </label>
-            <div class="btn-group w-100" role="group">
-              <input 
-                type="radio" 
-                class="btn-check" 
-                name="mode" 
-                id="exchange" 
-                value="exchange"
-                [(ngModel)]="publishMode"
-                autocomplete="off"
-              >
-              <label class="btn btn-outline-primary" for="exchange">
-                <i class="fas fa-exchange-alt"></i> Exchange
-              </label>
-
-              <input 
-                type="radio" 
-                class="btn-check" 
-                name="mode" 
-                id="queue" 
-                value="queue"
-                [(ngModel)]="publishMode"
-                autocomplete="off"
-              >
-              <label class="btn btn-outline-primary" for="queue">
-                <i class="fas fa-list"></i> Queue
-              </label>
-            </div>
-          </div>
-
-          <!-- Exchange Mode -->
-          <div *ngIf="publishMode === 'exchange'" class="mb-3 fade-in">
-            <label for="exchange" class="form-label fw-bold">
-              <i class="fas fa-server"></i> Exchange
-            </label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="exchange" 
-              [(ngModel)]="exchange"
-              placeholder="Ex: notification-exchange"
-            >
-            <small class="text-muted">Nome do exchange para rotear a mensagem</small>
-          </div>
-
-          <div *ngIf="publishMode === 'exchange'" class="mb-3 fade-in">
-            <label for="routingKey" class="form-label fw-bold">
-              <i class="fas fa-key"></i> Routing Key
-            </label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="routingKey" 
-              [(ngModel)]="routingKey"
-              placeholder="Ex: notification.email"
-            >
-            <small class="text-muted">Padrão para filtragem da mensagem (suporta wildcards: #, *)</small>
-          </div>
-
-          <!-- Queue Mode -->
-          <div *ngIf="publishMode === 'queue'" class="mb-3 fade-in">
-            <label for="queue" class="form-label fw-bold">
-              <i class="fas fa-inbox"></i> Queue
-            </label>
-            <input 
-              type="text" 
-              class="form-control" 
-              id="queue" 
-              [(ngModel)]="queue"
-              placeholder="Ex: notification-queue"
-            >
-            <small class="text-muted">Nome da fila para enviar a mensagem diretamente</small>
-          </div>
-
-          <!-- Message Textarea -->
-          <div class="mb-3">
-            <label for="message" class="form-label fw-bold">
-              <i class="fas fa-envelope"></i> Mensagem
-            </label>
-            <textarea 
-              class="form-control" 
-              id="message" 
-              rows="4"
-              [(ngModel)]="message"
-              placeholder="Escreva sua mensagem aqui..."
-            ></textarea>
-            <small class="text-muted">Máximo de 5000 caracteres</small>
-          </div>
-
-          <!-- Content Type -->
-          <div class="mb-4">
-            <label for="contentType" class="form-label fw-bold">
-              <i class="fas fa-file-alt"></i> Content Type
-            </label>
-            <select class="form-select" id="contentType" [(ngModel)]="contentType">
-              <option value="application/json">JSON</option>
-              <option value="text/plain">Text</option>
-              <option value="application/xml">XML</option>
-            </select>
-          </div>
-
-          <!-- Buttons -->
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-end">
-            <button 
-              type="button" 
-              class="btn btn-success btn-lg"
-              (click)="publishMessage()"
-              [disabled]="isLoading"
-            >
-              <i class="fas fa-send"></i>
-              {{ isLoading ? 'Enviando...' : 'Publicar Mensagem' }}
-            </button>
-            <button 
-              type="button" 
-              class="btn btn-outline-secondary btn-lg"
-              (click)="resetForm()"
-              [disabled]="isLoading"
-            >
-              <i class="fas fa-redo"></i> Limpar
-            </button>
-          </div>
-
-          <!-- Message ID Display -->
-          <div *ngIf="messageId" class="mt-4 alert alert-info">
-            <div class="d-flex align-items-center justify-content-between">
-              <div>
-                <strong>ID da Mensagem:</strong><br>
-                <code class="text-break">{{ messageId }}</code>
-              </div>
-              <button 
-                type="button" 
-                class="btn btn-sm btn-outline-info"
-                (click)="copyMessageId()"
-                title="Copiar ID"
-              >
-                <i class="fas fa-copy"></i>
-              </button>
-            </div>
-          </div>
-        </div>
+    <!-- Tipo de Publicação -->
+    <div class="field-group">
+      <label class="field-label">Tipo de Publicação</label>
+      <div class="mode-selector">
+        <label class="mode-option" [class.active]="publishMode === 'exchange'">
+          <input type="radio" name="mode" value="exchange" [(ngModel)]="publishMode">
+          <i class="fas fa-exchange-alt"></i> Exchange
+        </label>
+        <label class="mode-option" [class.active]="publishMode === 'queue'">
+          <input type="radio" name="mode" value="queue" [(ngModel)]="publishMode">
+          <i class="fas fa-layer-group"></i> Queue
+        </label>
       </div>
+    </div>
 
-      <!-- Info Box -->
-      <div class="card mt-4 bg-light border-primary">
-        <div class="card-body">
-          <h6 class="card-title text-primary">
-            <i class="fas fa-info-circle"></i> Dicas de Uso
-          </h6>
-          <ul class="small mb-0">
-            <li><strong>Exchange:</strong> Use para publicações em padrão (topic/fanout)</li>
-            <li><strong>Queue:</strong> Use para enviar direto a uma fila específica</li>
-            <li><strong>Routing Key:</strong> Suporta wildcards: <code>*</code> (uma palavra) ou <code>#</code> (zero ou mais)</li>
-            <li>Mensagens são processadas de forma assíncrona</li>
-          </ul>
-        </div>
+    <!-- Exchange -->
+    <div *ngIf="publishMode === 'exchange'" class="field-row fade-up">
+      <div class="field-group">
+        <label class="field-label">Exchange</label>
+        <input type="text" class="form-control" [(ngModel)]="exchange" placeholder="notification-exchange">
+      </div>
+      <div class="field-group">
+        <label class="field-label">Routing Key</label>
+        <input type="text" class="form-control" [(ngModel)]="routingKey" placeholder="notification.email">
+        <span class="field-hint">Wildcards: <code>*</code> (uma palavra) ou <code>#</code> (zero ou mais)</span>
+      </div>
+    </div>
+
+    <!-- Queue -->
+    <div *ngIf="publishMode === 'queue'" class="field-group fade-up">
+      <label class="field-label">Queue</label>
+      <input type="text" class="form-control" [(ngModel)]="queue" placeholder="notification-queue">
+    </div>
+
+    <!-- Mensagem -->
+    <div class="field-group">
+      <label class="field-label">Mensagem</label>
+      <textarea class="form-control" rows="5" [(ngModel)]="message" placeholder="Escreva o conteúdo da mensagem..."></textarea>
+    </div>
+
+    <!-- Content Type -->
+    <div class="field-group">
+      <label class="field-label">Content Type</label>
+      <select class="form-select" [(ngModel)]="contentType">
+        <option value="application/json">application/json</option>
+        <option value="text/plain">text/plain</option>
+        <option value="application/xml">application/xml</option>
+      </select>
+    </div>
+
+    <!-- Ações -->
+    <div class="pf-actions">
+      <button class="btn btn-outline-secondary" (click)="resetForm()" [disabled]="isLoading">
+        Limpar
+      </button>
+      <button class="btn btn-primary" (click)="publishMessage()" [disabled]="isLoading">
+        <i class="fas fa-paper-plane me-1"></i>
+        {{ isLoading ? 'Publicando...' : 'Publicar' }}
+      </button>
+    </div>
+
+    <!-- ID da Mensagem -->
+    <div *ngIf="messageId" class="message-id-box fade-up">
+      <span class="message-id-label">ID da mensagem</span>
+      <div class="d-flex align-items-center justify-content-between gap-2">
+        <code class="text-break message-id-code">{{ messageId }}</code>
+        <button class="btn btn-sm btn-outline-secondary flex-shrink-0" (click)="copyMessageId()" title="Copiar">
+          <i class="fas fa-copy"></i>
+        </button>
       </div>
     </div>
   </div>
