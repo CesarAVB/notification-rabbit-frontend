@@ -1,12 +1,21 @@
-import { Component, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HeaderComponent } from './components/header/header';
+import { FooterComponent } from './components/footer/footer';
+import { PublishFormComponent } from './components/publish-form/publish-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    FooterComponent,
+    PublishFormComponent
+  ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
-  protected readonly title = signal('notification-app');
+export class AppComponent {
+  title = 'notification-app';
 }

@@ -1,0 +1,62 @@
+name: Deploy React App to Nginx
+
+# Gatilho: roda quando houver push na branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest   # Ambiente do GitHub Actions (Ubuntu)
+
+    steps:
+      # 1️⃣ Baixar o código do repositório
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 2️⃣ Configurar Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'  # Versão do Node.js
+          cache: 'npm'
+
+      # 3️⃣ Instalar dependências
+      - name: Install dependencies
+        run: npm ci   # npm ci garante build reproduzível no CI (mais rápido e confiável que npm install)
+
+      # 4️⃣ Build do projeto React/Vite em modo produção
+      # Gera os arquivos otimizados na pasta dist/
+      - name: Build React app
+        run: npm run build
+
+      # 5️⃣ Deploy para o servidor Nginx via rsync
+      # rsync é mais eficiente que SCP para sincronizar arquivos
+      - name: Deploy to Nginx
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          # Switches do rsync:
+          # -a = modo arquivo (preserva permissões, timestamps, etc)
+          # -v = verbose (mostra o que está sendo copiado)
+          # -z = comprime dados durante transferência
+          # -r = recursivo (copia subpastas)
+          # --delete = remove arquivos antigos do servidor que não existem mais no source
+          switches: -avzr --delete
+
+          # IMPORTANTE: a barra / no final copia APENAS O CONTEÚDO da pasta dist
+          # Sem a barra, copiaria a pasta "dist" inteira
+          path: dist/
+
+          # Pasta de destino no servidor (onde o Nginx serve os arquivos)
+          remote_path: /var/www/html/projetos_web/logbooks/
+
+          # Dados de conexão SSH (armazenados nos Secrets do GitHub)
+          remote_host: ${{ secrets.SERVER_HOST }}      # IP ou domínio do servidor
+          remote_port: ${{ secrets.SERVER_PORT }}      # Porta SSH (normalmente 22)
+          remote_user: ${{ secrets.SERVER_USER }}      # Usuário SSH
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}   # Chave privada SSH
+
+      # 6️⃣ Mensagem de sucesso
+      - name: Deployment complete
+        run: echo "React frontend netmap deployed successfully to nginx"

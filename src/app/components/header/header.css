@@ -1,0 +1,14 @@
+header {
+  border-bottom: 3px solid #007bff;
+}
+
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.3rem;
+  gap: 8px;
+}
+
+.badge {
+  font-size: 0.85rem;
+  padding: 0.35rem 0.65rem;
+}

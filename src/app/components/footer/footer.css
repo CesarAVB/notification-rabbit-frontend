@@ -1,0 +1,18 @@
+.footer {
+  flex-shrink: 0;
+  border-top: 1px solid #444;
+  margin-top: auto;
+}
+
+a {
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+small {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}

@@ -1,0 +1,13 @@
+<header class="navbar navbar-dark bg-dark shadow-sm">
+  <div class="container-fluid">
+    <span class="navbar-brand mb-0 h1">
+      <i class="fas fa-bell"></i> Notification Service
+    </span>
+    <div class="d-flex align-items-center gap-3">
+      <span class="text-light">
+        Serviço: <span [class]="getStatusClass()">{{ serviceStatus }}</span>
+      </span>
+      <small class="text-muted">{{ statusMessage }}</small>
+    </div>
+  </div>
+</header>

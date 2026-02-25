@@ -1,0 +1,114 @@
+.card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1) !important;
+}
+
+.card-header {
+  border-bottom: 2px solid #0d6efd;
+  padding: 1.25rem;
+}
+
+.card-header h5 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+  color: #212529;
+  font-size: 0.95rem;
+}
+
+.form-control, .form-select {
+  border: 1px solid #dee2e6;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+textarea {
+  resize: vertical;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+}
+
+.btn-group {
+  margin-bottom: 1rem;
+}
+
+.btn-group .btn {
+  transition: all 0.3s ease;
+}
+
+.btn {
+  transition: all 0.3s ease;
+}
+
+.btn-success {
+  background-color: #198754;
+  border-color: #198754;
+}
+
+.btn-success:hover:not(:disabled) {
+  background-color: #157347;
+  border-color: #157347;
+}
+
+.btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.alert {
+  animation: slideDown 0.3s ease-in;
+  border: none;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+code {
+  background-color: #f8f9fa;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.85rem;
+}
+
+small {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.border-primary {
+  border: 2px solid #0d6efd !important;
+}
+
+.card-body ul li {
+  margin-bottom: 0.5rem;
+}
+
+i {
+  width: 1.2rem;
+  text-align: center;
+}
