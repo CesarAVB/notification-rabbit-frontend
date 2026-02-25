@@ -2,7 +2,7 @@
 
 Interface web para publicação e monitoramento de mensagens em filas e exchanges do RabbitMQ. Desenvolvida em Angular 20 com design minimalista e responsivo.
 
-<img width="1919" height="873" alt="image" src="https://github.com/user-attachments/assets/65f35625-a4e6-4643-b8aa-4eac50e8cc22" />
+<img width="1917" height="871" alt="image" src="https://github.com/user-attachments/assets/7e979e4e-81ae-42c1-bb87-74820abe97df" />
 
 ---
 
