@@ -63,9 +63,8 @@ export class MessageList implements OnInit {
     return 'Mensagem';
   }
 
-  copyMessageContent(content: string): void {
-    navigator.clipboard.writeText(content).then(() => {
-      // Could add a toast notification here
+  copyMessageContent(message: string): void {
+    navigator.clipboard.writeText(message).then(() => {
       console.log('Conteúdo copiado para a área de transferência');
     }).catch(err => {
       console.error('Erro ao copiar:', err);

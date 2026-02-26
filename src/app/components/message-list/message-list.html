@@ -26,10 +26,10 @@
           </div>
           <span class="ml-item-time">{{ msg.timestamp | date:'dd/MM HH:mm' }}</span>
         </div>
-        <p class="ml-item-body">{{ msg.content }}</p>
+        <p class="ml-item-body">{{ msg.message }}</p>
         <div class="ml-item-footer">
-          <span class="ml-badge">{{ msg.contentType }}</span>
-          <button class="ml-copy" (click)="copyMessageContent(msg.content)" title="Copiar conteúdo">
+          <span class="ml-badge">{{ msg.status }}</span>
+          <button class="ml-copy" (click)="copyMessageContent(msg.message)" title="Copiar conteúdo">
             <i class="fas fa-copy"></i>
           </button>
         </div>

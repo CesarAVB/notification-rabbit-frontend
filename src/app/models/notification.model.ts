@@ -28,14 +28,22 @@ export interface ErrorResponse {
 }
 
 export interface MessageItem {
-  id: string;
-  content: string;
-  contentType?: string;
+  messageId: string;
+  status: string;
+  message: string;
   exchange?: string;
   routingKey?: string;
   queue?: string;
-  status?: string;
   timestamp: string;
 }
 
-export type RecentMessagesResponse = MessageItem[];
+export interface PageResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+  first: boolean;
+  last: boolean;
+  empty: boolean;
+}
